@@ -1,0 +1,120 @@
+{
+  "uploadCommit": "04edafd39996e915dbd6d18d0543f525e9ecbf0b",
+  "fileCount": 14,
+  "uniqueImageCount": 13,
+  "images": [
+    {
+      "originalFilename": "Captura de tela 2026-10-11 182854.png",
+      "filename": "pintura-retrato-mulher-cabelos-castanhos.png",
+      "category": "painting",
+      "width": 762,
+      "height": 1007,
+      "sha256": "5c8b1ffc9dc240a9553f050fc19a84b3cdfe3910a0034c1dbf5602914614b0fd"
+    },
+    {
+      "originalFilename": "Captura de tela 2026-10-11 182907.png",
+      "filename": "pintura-composicao-rostos.png",
+      "category": "painting",
+      "width": 561,
+      "height": 956,
+      "sha256": "c39c9bdde9850ccd3b15290e7833b6b7038a680f712f3205dc631b954a17484f"
+    },
+    {
+      "originalFilename": "Captura de tela 2026-10-11 182930.png",
+      "filename": "dario-silva-sorrindo-boina-oculos.png",
+      "category": "artist-photograph",
+      "width": 767,
+      "height": 1022,
+      "sha256": "1c02aed5db69e222320bfc117f3372ab6fca087a8c673b5f7c8fd6eae6b4434d"
+    },
+    {
+      "originalFilename": "Captura de tela 2026-10-11 182946.png",
+      "filename": "dario-silva-retrato-formal.png",
+      "category": "artist-photograph",
+      "width": 530,
+      "height": 727,
+      "sha256": "fd17aabc3c2e15ffeb1059dc65f4faba502fc63e57e16846411558a8fb3eb396"
+    },
+    {
+      "originalFilename": "Captura de tela 2026-10-11 182958.png",
+      "filename": "pintura-composicao-geometrica-figura.png",
+      "category": "painting",
+      "width": 580,
+      "height": 908,
+      "sha256": "0761913e1a52143386dcac828418bbcf148aabfef5653ba7bb5f38423ac2e087"
+    },
+    {
+      "originalFilename": "Captura de tela 2026-10-11 183021.png",
+      "filename": "pintura-composicao-figuras-crianca.png",
+      "category": "painting",
+      "width": 685,
+      "height": 971,
+      "sha256": "e969c385070432da3bcd6e68faf1fa880fa02164e161423028e31da3af17f41f"
+    },
+    {
+      "originalFilename": "Captura de tela 2026-10-11 183038.png",
+      "filename": "atelie-dario-silva.png",
+      "category": "studio-photograph",
+      "width": 1252,
+      "height": 797,
+      "sha256": "a47951af9af4b1564e8ac5cad262abace2afb0f3ee6fae91b6d35d165b470d31"
+    },
+    {
+      "originalFilename": "Captura de tela 2026-10-11 183055.png",
+      "filename": "pintura-composicao-religiosa.png",
+      "category": "painting",
+      "width": 517,
+      "height": 768,
+      "sha256": "25ce8cbfc8a16d9534eb98c57aa455c939e550677dc1cd04d6bf78fcb916d5ed"
+    },
+    {
+      "originalFilename": "Captura de tela 2026-10-11 183130.png",
+      "filename": "pintura-retrato-homem-oculos.png",
+      "category": "painting",
+      "width": 338,
+      "height": 542,
+      "sha256": "cf6cc05c40cd168a1b1c42bcfbb889fa3aad7a8a81839f4a2ee0322b0718df1c"
+    },
+    {
+      "originalFilename": "Captura de tela 2026-10-11 183151 - Copia.png",
+      "filename": "pintura-crucificacao.png",
+      "category": "painting",
+      "width": 567,
+      "height": 972,
+      "sha256": "a43ef82954994a8c62ae1249bad3026fcee6505df093334b4114a7fe81fe5000"
+    },
+    {
+      "originalFilename": "Captura de tela 2026-10-11 183206.png",
+      "filename": "pintura-paisagem-maritima.png",
+      "category": "painting",
+      "width": 1280,
+      "height": 882,
+      "sha256": "6227feae6e084469f907b009eb248af7df6ac408bdab9e73dcbd60f28ecf8a71"
+    },
+    {
+      "originalFilename": "Captura de tela 2026-10-11 183411.png",
+      "filename": "detalhe-composicao-religiosa.png",
+      "category": "painting-detail",
+      "width": 575,
+      "height": 1012,
+      "sha256": "8c4269b6ec6f3faf897e56eb0d7c1153c3b646b523f93238aad01f6df881f5a5"
+    },
+    {
+      "originalFilename": "Captura de tela 2026-10-11 183411 - Copia.png",
+      "filename": "detalhe-composicao-religiosa-copia.png",
+      "category": "duplicate",
+      "width": 575,
+      "height": 1012,
+      "sha256": "8c4269b6ec6f3faf897e56eb0d7c1153c3b646b523f93238aad01f6df881f5a5",
+      "duplicateOf": "detalhe-composicao-religiosa.png"
+    },
+    {
+      "originalFilename": "Captura de tela 2026-10-11 184215.png",
+      "filename": "dario-silva-camisa-branca.png",
+      "category": "artist-photograph",
+      "width": 390,
+      "height": 526,
+      "sha256": "e22cc80fbb77d53af44b2633b33ca85430f48a9c2653a6d71bce774e32c9f978"
+    }
+  ]
+}

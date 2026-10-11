@@ -7,7 +7,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: { default: 'SOLARTE | Dário Silva — Artista Plástico', template: '%s — SOLARTE | Dário Silva' },
-  description: 'SOLARTE, espaço dedicado à obra e à formação de Dário Silva, artista plástico brasileiro. Acervo em preparação e biografia fornecida pela família, em revisão.',
+  description: 'SOLARTE, espaço dedicado à obra e à formação de Dário Silva, artista plástico brasileiro. Pinturas e fotografias cedidas para o acervo, com biografia fornecida pela família, em revisão.',
   icons: { icon: '/icon.svg' },
   robots: { index: false, follow: false },
 };

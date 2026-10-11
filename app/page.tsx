@@ -21,7 +21,7 @@ export default function Home() {
             <figcaption><span>{canDisplayImage(heroArtwork) ? heroArtwork.title : 'Obra em destaque · imagem pendente'}</span><span>{canDisplayImage(heroArtwork) ? heroArtwork.year : 'Acervo em preparação'}</span></figcaption>
           </figure>
         </div>
-        <div className="hero-bottom"><p>Um encontro com a obra e seu autor.</p><a href="#selecao" className="text-link">Percorrer o acervo <span>↓</span></a></div>
+        <div className="hero-bottom"><p>Um encontro com a obra e seu autor.</p><a href="#selecao" className="text-link">Explorar o acervo <span>↓</span></a></div>
       </section>
       <section id="selecao" className="selection page-shell">
         <div className="section-heading"><div><p className="eyebrow">01 / Acervo</p><h2>Obras<br /><em>selecionadas</em></h2></div><Link className="text-link" href="/obras">Todas as obras ↗</Link></div>
@@ -37,6 +37,7 @@ export default function Home() {
             <p>{artistBiography.summary}</p>
             <p className="source-note">Biografia fornecida pela família. Texto provisório, sujeito à revisão.</p>
             <Link className="text-link" href="/o-artista">Conheça o artista ↗</Link>
+            <Link className="text-link trajectory-link" href="/trajetoria">Conhecer sua trajetória ↗</Link>
           </div>
         </div>
       </section>

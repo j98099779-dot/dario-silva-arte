@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArtistImage } from '@/components/artist-image';
 import { ArtworkImage } from '@/components/artwork-image';
+import { ExpandableImage } from '@/components/expandable-image';
 import { artist, artistBiography, artistTraining } from '@/data/artist';
 import { artworks, canDisplayImage } from '@/data/artworks';
 
@@ -82,11 +83,17 @@ export default function Artist() {
             <span>{artist.portraits[1] ? 'Retrato do acervo familiar' : 'Fotografia formal a integrar'}</span>
           </figcaption>
         </figure>
-        <div className="biography-copy">
-          <p className="eyebrow">Do retrato à pintura</p>
-          <p>Desenhista e retratista, eclético por opção.</p>
-          <Link href="/obras" className="text-link">Percorrer o acervo ↗</Link>
-        </div>
+        <figure>
+          <ArtistImage image={artist.portraits[2] ?? null} label="Dário Silva sorrindo, com boina e óculos" />
+          <figcaption><span>Dário Silva</span><span>Um encontro com a pintura</span></figcaption>
+        </figure>
+      </section>
+
+      <section className="archive-image biography-section" aria-labelledby="arquivo-titulo">
+        <div><p className="eyebrow">Arquivo familiar</p><h2 id="arquivo-titulo">Registro fotográfico</h2>
+          <p>Um registro do artista, preservado integralmente no acervo familiar.</p></div>
+        <figure><ExpandableImage image={artist.archiveImage} title="Registro fotográfico" actionLabel="Ampliar registro fotográfico" />
+          <figcaption><span>Dário Silva · camisa branca</span><span>Ampliar para observar</span></figcaption></figure>
       </section>
 
       {closingArtwork && (

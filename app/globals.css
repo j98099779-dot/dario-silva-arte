@@ -109,3 +109,28 @@
   .closing-painting { width: 100%; }
   .milestone > h2 { font-size: 30px; }
 }
+
+/* As reproduções usam suas proporções intrínsecas: nenhum recorte ou filtro. */
+.hero-art figure { width: min(100%, 680px); margin-left: auto; }
+.hero-art .painting { width: auto; max-width: 100%; height: auto; max-height: 78vh; margin-left: auto; }
+.hero-art .placeholder { width: 100%; }
+.home-artist-copy .trajectory-link { margin-left: 24px; }
+.complementary-portraits figure:nth-child(2) { margin-top: 90px; }
+.lightbox .painting { width: auto; max-width: 100%; height: auto; margin-inline: auto; }
+.archive-image, .artwork-detail-image { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12%; align-items: start; }
+.archive-image figure { max-width: 390px; margin-left: auto; }
+.archive-image h2, .artwork-detail-image h2 { font-size: clamp(34px, 3.8vw, 56px); margin: 24px 0; line-height: 1.15; }
+.archive-image p, .artwork-detail-image p { font-size: 14px; line-height: 1.8; max-width: 380px; }
+.archive-image .eyebrow, .artwork-detail-image .eyebrow { font-size: 10px; }
+.artwork-detail-image { border-top: 1px solid var(--line); padding-top: 50px; padding-bottom: 70px; }
+.artwork-info .catalog-note { margin: 22px 0; }
+.original-image-link { margin-top: 15px; }
+@media (max-width: 700px) {
+  .hero-art figure { width: 100%; }
+  .hero-art .painting { margin-inline: auto; max-height: none; width: 100%; }
+  .home-artist-copy .trajectory-link { margin-left: 0; margin-top: 25px; display: table; }
+  .complementary-portraits figure:nth-child(2) { margin-top: 0; }
+  .archive-image, .artwork-detail-image { grid-template-columns: 1fr; gap: 32px; }
+  .archive-image figure { margin-left: 0; }
+  .archive-image h2, .artwork-detail-image h2 { font-size: 36px; }
+}

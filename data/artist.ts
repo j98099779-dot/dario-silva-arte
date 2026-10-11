@@ -1,3 +1,5 @@
+import { getProvidedImage } from './artworks';
+
 export type ArtistImage = {
   src: string;
   alt: string;
@@ -63,9 +65,14 @@ export const artist = {
   biographyNote: artistBiography.sourceNote,
   // Retrato de camisa branca primeiro; retrato formal com óculos em seguida.
   // Integre somente fotografias disponíveis, com procedência e autorização.
-  portraits: [] as ArtistImage[],
-  homePortrait: null as ArtistImage | null,
-  studio: null as ArtistImage | null,
+  portraits: [
+    getProvidedImage('dario-silva-camisa-branca.png', 'Fotografia de Dário Silva sorrindo, vestindo camisa branca.'),
+    getProvidedImage('dario-silva-retrato-formal.png', 'Fotografia formal de Dário Silva com óculos e vestimenta escura.'),
+    getProvidedImage('dario-silva-sorrindo-boina-oculos.png', 'Dário Silva sorrindo, com boina e óculos, diante de uma pintura.'),
+  ] as ArtistImage[],
+  homePortrait: getProvidedImage('dario-silva-sorrindo-boina-oculos.png', 'Dário Silva sorrindo, com boina e óculos, diante de uma pintura.') as ArtistImage | null,
+  studio: getProvidedImage('atelie-dario-silva.png', 'Ateliê de Dário Silva com pinturas, esculturas, pincéis e objetos artísticos próximos às janelas.') as ArtistImage | null,
+  archiveImage: getProvidedImage('dario-silva-camisa-branca.png', 'Registro fotográfico original de Dário Silva sorrindo e vestindo camisa branca.'),
   training: artistTraining,
   milestones: [
     {

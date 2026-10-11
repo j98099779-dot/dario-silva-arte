@@ -38,7 +38,9 @@ O Playwright inicia o servidor de produção automaticamente e testa navegação
 - A imagem de uma obra só aparece quando `image`, `source` e `permission` estão preenchidos. Em `permission`, registre a autorização e sua referência, sem dados pessoais sensíveis. Retratos devem ter os mesmos registros preenchidos antes de entrar no array.
 - Não há painel CMS nesta versão: os campos são editáveis nos arquivos TypeScript. Alterações passam pelo build e Git.
 
-Nenhuma das 13 imagens citadas na atualização SOLARTE foi recebida neste ambiente. Os seis registros continuam sendo espaços de catalogação, com dados desconhecidos explicitamente marcados. A lista de arquivos ausentes e os destinos preparados estão em `docs/image-integration.md`; a pesquisa anterior está em `docs/image-research.md`. A biografia é a transcrição fornecida pela família, com aviso de conteúdo provisório devido à imagem original parcialmente cortada. A formação e os mestres são atribuídos a essa fonte, sem inventar exposições, premiações ou datas.
+Foram recebidos 14 arquivos PNG no commit `04edafd`: 13 imagens distintas e 1 cópia idêntica. Todas as 13 imagens únicas estão integradas: 8 pinturas, 1 detalhe associado à Obra 05, 3 fotografias do artista e 1 fotografia do ateliê. Os 14 arquivos originais foram renomeados sem alterar bytes ou dimensões; `data/image-inventory.json` registra nomes antigos, novos e hashes. A duplicata está preservada, mas não vira outra obra.
+
+O upload não contém página impressa com texto biográfico. O registro de camisa branca é uma fotografia independente, disponível também para ampliação no arquivo familiar. A biografia HTML continua sendo a transcrição familiar, com aviso de revisão. Nenhum título, ano, técnica ou dimensão física foi inventado: “Obra 01” a “Obra 08” são identificações de catálogo. Consulte `docs/image-integration.md` para procedência e distribuição.
 
 ## Publicação e SEO
 
@@ -46,4 +48,4 @@ Metadados por página, HTML semântico e idioma pt-BR estão configurados. A ind
 
 ## Registros visuais
 
-Com o servidor em execução, use `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run screenshots` para capturar a Home e O Artista em desktop/mobile. As capturas ficam em `docs/screenshots/` e documentam a versão com imagens pendentes.
+Com o servidor em execução, use `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium npm run screenshots` para capturar a Home e O Artista em desktop/mobile. As capturas ficam em `docs/screenshots/` e documentam a versão com as pinturas e fotografias reais integradas.
