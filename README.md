@@ -1,4 +1,6 @@
-# DÁRIO SILVA — Artista Plástico
+# Dário Silva — Arte & Legado
+
+DÁRIO SILVA — Artista Plástico
 
 Site editorial de artista em Next.js App Router, TypeScript e Tailwind CSS. Papel branco quente, tipografia serifada editorial e composições assimétricas. Layouts distintos para desktop e mobile; sem carrosséis ou pinturas artificiais.
 
