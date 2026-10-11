@@ -86,12 +86,10 @@ test('SOLARTE identifica o site e a Home apresenta o acervo e o ateliê', async 
   expect(response.ok()).toBe(true);
 });
 
-test('Home exibe primeiro o artista de camisa branca, a seleção real e o ateliê sem recortar imagens', async ({ page }) => {
+test('Home exibe primeiro o artista, a seleção real e o ateliê sem recortar imagens', async ({ page }) => {
   await page.goto('/');
   await expectNoPlaceholders(page);
-  const heroPortrait = artist.portraits[0];
-  expect(heroPortrait.src).toBe('/images/dario-silva-camisa-branca.png');
-  await expectRealImage(page.locator('.hero-art img'), heroPortrait.src);
+  await expectRealImage(page.locator('.hero-art img'), '/images/Captura de tela 2026-10-11 201437.png');
   const selected = page.locator('#selecao .gallery-grid img');
   await expect(selected).toHaveCount(curation.selected.length);
   for (const [index, slug] of curation.selected.entries()) {
@@ -102,7 +100,7 @@ test('Home exibe primeiro o artista de camisa branca, a seleção real e o ateli
   expect(artist.homePortrait).toBeTruthy();
   expect(artist.studio).toBeTruthy();
   await expectRealImage(page.locator('.home-artist figure img'), artist.homePortrait!.src);
-  await expectRealImage(page.locator('.studio figure img'), artist.studio!.src);
+  await expectRealImage(page.locator('.studio figure img'), '/images/Captura de tela 2026-10-11 201831.png');
 });
 
 test('composição editorial equilibra o retrato no desktop e o apresenta antes do texto no celular', async ({ page }) => {

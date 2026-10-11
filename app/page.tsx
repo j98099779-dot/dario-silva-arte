@@ -6,7 +6,22 @@ import { ArtistImage } from '@/components/artist-image';
 import { Gallery } from '@/components/gallery';
 
 export default function Home() {
-  const heroPortrait = artist.portraits[0];
+  const heroPortrait = {
+    ...artist.portraits[0],
+    src: '/images/Captura de tela 2026-10-11 201437.png',
+    alt: 'Registro de jornal com fotografia de Dário Silva de terno e óculos diante de pinturas, com texto impresso abaixo.',
+    width: 1097,
+    height: 957,
+    source: 'https://github.com/j98099779-dot/dario-silva-arte/blob/7e3e8a29ed2e31822d375e2a7b69c4a4959a95de/public/images/Captura%20de%20tela%202026-10-11%20201437.png',
+  };
+  const studioImage = {
+    src: '/images/Captura de tela 2026-10-11 201831.png',
+    alt: 'Ateliê de Dário Silva com cavaletes, pinturas, pincéis, esculturas e uma cadeira branca entre as obras.',
+    width: 992,
+    height: 657,
+    source: 'https://github.com/j98099779-dot/dario-silva-arte/blob/7e3e8a29ed2e31822d375e2a7b69c4a4959a95de/public/images/Captura%20de%20tela%202026-10-11%20201831.png',
+    permission: artist.portraits[0].permission,
+  };
   const selected = curation.selected.flatMap(slug => { const artwork = getArtwork(slug); return artwork ? [artwork] : []; });
   return (
     <>
@@ -32,7 +47,7 @@ export default function Home() {
           </div>
           <div className="hero-art">
             <figure>
-              <ArtistImage image={heroPortrait} label="Dário Silva sorrindo, de camisa branca" priority />
+              <ArtistImage image={heroPortrait} label="Dário Silva diante de pinturas" priority />
               <figcaption><span>Dário Silva</span><span>Artista Plástico Brasileiro</span></figcaption>
             </figure>
           </div>
@@ -59,7 +74,7 @@ export default function Home() {
       </section>
       <section className="studio page-shell">
         <div className="section-heading"><div><p className="eyebrow">03 / Ambiente de criação</p><h2>O Ateliê</h2></div><p>O espaço da pintura.</p></div>
-        <figure><ArtistImage image={artist.studio} label="O ateliê de Dário Silva" format="landscape" /><figcaption><span>Ambiente de criação</span><span>{artist.studio ? 'Registro do ateliê' : 'Fotografia pendente'}</span></figcaption></figure>
+        <figure><ArtistImage image={studioImage} label="O ateliê de Dário Silva" format="landscape" /><figcaption><span>Ambiente de criação</span><span>{studioImage ? 'Registro do ateliê' : 'Fotografia pendente'}</span></figcaption></figure>
       </section>
       <section className="archive-invitation page-shell">
         <p className="eyebrow">Continuar o olhar</p>
