@@ -134,3 +134,59 @@
   .archive-image figure { margin-left: 0; }
   .archive-image h2, .artwork-detail-image h2 { font-size: 36px; }
 }
+
+/* Uma abertura dedicada ao artista, com geometria silenciosa e retrato integral. */
+.hero-composition {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 70px);
+  align-items: stretch;
+}
+.hero-editorial {
+  background: #efebe3;
+  padding: clamp(30px, 4vw, 62px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+}
+.hero-geometric {
+  width: min(65%, 245px);
+  height: auto;
+  align-self: center;
+  opacity: .65;
+}
+.hero-fine-line {
+  display: block;
+  width: 38px;
+  height: 1px;
+  background: #a99e8c;
+  margin-bottom: 25px;
+}
+.hero-editorial-copy > p {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 42px);
+  letter-spacing: -.025em;
+  line-height: 1.25;
+}
+.hero-editorial-copy .text-link { margin-top: 30px; }
+.hero-composition .hero-art { width: 100%; margin: 0; }
+.hero-composition .hero-art figure { width: 100%; max-width: 500px; margin: 0 0 0 auto; }
+.hero-composition .hero-art .painting { width: 100%; height: auto; max-height: none; margin: 0; }
+@media (min-width: 701px) and (max-width: 1024px) {
+  .hero-composition { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; }
+  .hero-editorial { padding: 30px; gap: 25px; }
+  .hero-geometric { width: min(80%, 205px); }
+  .hero-editorial-copy > p { font-size: 30px; }
+}
+@media (max-width: 700px) {
+  .hero-composition { grid-template-columns: 1fr; gap: 22px; }
+  .hero-composition .hero-art { grid-row: 1; }
+  .hero-composition .hero-art figure { max-width: none; margin: 0; }
+  .hero-editorial { grid-row: 2; display: block; position: relative; padding: 30px; }
+  .hero-geometric { position: absolute; width: 110px; height: auto; right: 14px; top: 20px; opacity: .35; }
+  .hero-editorial-copy { position: relative; }
+  .hero-editorial-copy > p { font-size: 28px; }
+  .hero-fine-line { margin-bottom: 18px; }
+  .hero-editorial-copy .text-link { margin-top: 23px; }
+}

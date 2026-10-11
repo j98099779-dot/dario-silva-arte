@@ -76,7 +76,7 @@ test('SOLARTE identifica o site e a Home apresenta o acervo e o ateliê', async 
 
   await expect(page.getByRole('heading', { name: 'Obras selecionadas', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'O Ateliê', exact: true })).toBeVisible();
-  await expect(page.getByRole('link', { name: /Conheça o artista/i })).toBeVisible();
+  await expect(page.locator('.hero').getByRole('link', { name: /Conheça o artista/i })).toBeVisible();
   await expect(page.locator('main').getByRole('link', { name: /acervo completo|todas as obras/i }).first()).toBeVisible();
 
   const favicon = page.locator('link[rel="icon"]').first();
@@ -86,12 +86,12 @@ test('SOLARTE identifica o site e a Home apresenta o acervo e o ateliê', async 
   expect(response.ok()).toBe(true);
 });
 
-test('Home exibe a pintura escolhida, a seleção real, o retrato e o ateliê sem recortar imagens', async ({ page }) => {
+test('Home exibe primeiro o artista de camisa branca, a seleção real e o ateliê sem recortar imagens', async ({ page }) => {
   await page.goto('/');
   await expectNoPlaceholders(page);
-  const hero = getArtwork(curation.hero);
-  expect(hero?.image).toBeTruthy();
-  await expectRealImage(page.locator('.hero-art img'), hero!.image!.src);
+  const heroPortrait = artist.portraits[0];
+  expect(heroPortrait.src).toBe('/images/dario-silva-camisa-branca.png');
+  await expectRealImage(page.locator('.hero-art img'), heroPortrait.src);
   const selected = page.locator('#selecao .gallery-grid img');
   await expect(selected).toHaveCount(curation.selected.length);
   for (const [index, slug] of curation.selected.entries()) {
@@ -103,6 +103,33 @@ test('Home exibe a pintura escolhida, a seleção real, o retrato e o ateliê se
   expect(artist.studio).toBeTruthy();
   await expectRealImage(page.locator('.home-artist figure img'), artist.homePortrait!.src);
   await expectRealImage(page.locator('.studio figure img'), artist.studio!.src);
+});
+
+test('composição editorial equilibra o retrato no desktop e o apresenta antes do texto no celular', async ({ page }) => {
+  await page.goto('/');
+  const panel = page.locator('.hero-editorial');
+  const portrait = page.locator('.hero-art');
+  await expect(panel).toContainText('Uma vida dedicada à arte');
+  const artistLink = panel.getByRole('link', { name: /Conheça o artista/i });
+  await expect(artistLink).toHaveAttribute('href', '/o-artista');
+  await expect(panel.locator('svg')).toHaveAttribute('aria-hidden', 'true');
+
+  const [panelBounds, portraitBounds] = await Promise.all([panel.boundingBox(), portrait.boundingBox()]);
+  expect(panelBounds).not.toBeNull();
+  expect(portraitBounds).not.toBeNull();
+  const width = page.viewportSize()!.width;
+  if (width <= 700) {
+    expect(portraitBounds!.y + portraitBounds!.height).toBeLessThanOrEqual(panelBounds!.y + 1);
+    expect(panelBounds!.y - portraitBounds!.y - portraitBounds!.height).toBeLessThan(50);
+  } else {
+    expect(panelBounds!.x + panelBounds!.width).toBeLessThanOrEqual(portraitBounds!.x + 1);
+    expect(Math.min(panelBounds!.y + panelBounds!.height, portraitBounds!.y + portraitBounds!.height))
+      .toBeGreaterThan(Math.max(panelBounds!.y, portraitBounds!.y));
+  }
+
+  await artistLink.click();
+  await expect(page).toHaveURL('/o-artista');
+  await expect(page.getByRole('heading', { name: 'A arte como expressão de uma vida', exact: true })).toBeVisible();
 });
 
 test('cada pintura real carrega no acervo e em sua ficha, com proporções e campos sem informações inventadas', async ({ page }) => {
