@@ -1,0 +1,3 @@
+import { artist } from '@/data/artist';
+export const metadata = { title: 'Contato' };
+export default function Contact() { return <section className="page-shell inner-page contact-page"><p className="eyebrow">Contato</p><h1>Vamos<br /><em>conversar.</em></h1><div className="contact-layout"><p>Para conhecer o trabalho,<br />conversar sobre uma obra<br />ou propor um encontro.</p><div>{artist.email && <a className="contact-link" href={`mailto:${artist.email}`}>{artist.email} ↗</a>}<a className="contact-link" href={artist.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗<small>@dario_solarte</small></a><a className="contact-link" href={artist.facebook} target="_blank" rel="noopener noreferrer">Facebook ↗<small>Dário Silva</small></a></div></div></section>; }
