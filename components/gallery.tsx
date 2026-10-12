@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRef, useState, type KeyboardEvent } from 'react';
 import { Artwork } from '@/data/artworks';
 import { ArtworkImage } from './artwork-image';
+import { ArrowIcon } from './arrow';
 
 export function Gallery({ artworks }: { artworks: Artwork[] }) {
   const dialog = useRef<HTMLDialogElement>(null);
@@ -39,8 +40,8 @@ export function Gallery({ artworks }: { artworks: Artwork[] }) {
         {artworks.map((artwork, index) => (
           <figure key={artwork.slug} className={`gallery-work work-${index % 6}`}>
             <button className="image-button" onClick={event => open(artwork, event.currentTarget)} aria-label={`Ampliar ${artwork.title}`}>
-              <ArtworkImage artwork={artwork} sizes="(max-width: 700px) 90vw, 45vw" />
-              <span className="expand-icon" aria-hidden="true">↗</span>
+              <ArtworkImage artwork={artwork} sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1100px) 43vw, 28vw" />
+              <span className="expand-icon" aria-hidden="true"><ArrowIcon direction="up-right" /></span>
             </button>
             <figcaption><Link href={`/obras/${artwork.slug}`}>{artwork.title}</Link><span>{artwork.year ?? 'Catalogação pendente'}</span></figcaption>
           </figure>
@@ -60,7 +61,7 @@ export function Gallery({ artworks }: { artworks: Artwork[] }) {
           <ArtworkImage artwork={selected} sizes="90vw" />
           <div className="lightbox-caption">
             <h2 id="lightbox-title">{selected.title}</h2>
-            <Link href={`/obras/${selected.slug}`} onClick={() => dialog.current?.close()}>Ver ficha da obra ↗</Link>
+            <Link href={`/obras/${selected.slug}`} onClick={() => dialog.current?.close()}>Ver ficha da obra <ArrowIcon /></Link>
           </div>
         </div>
       </dialog>

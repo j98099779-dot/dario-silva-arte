@@ -1,9 +1,10 @@
 import { test, expect, type Locator, type Page } from '@playwright/test';
 import { artworks, getArtwork } from '../../data/artworks';
-import { artist } from '../../data/artist';
+import { artist, artistBiography } from '../../data/artist';
 import { curation } from '../../data/curation';
 
 const navigation = [
+  { label: 'Início', route: '/' },
   { label: 'Obras', route: '/obras' },
   { label: 'O Artista', route: '/o-artista' },
   { label: 'Trajetória', route: '/trajetoria' },
@@ -64,19 +65,20 @@ async function expectNoPlaceholders(page: Page) {
 test('SOLARTE identifica o site e a Home apresenta o acervo e o ateliê', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('header')).toContainText('SOLARTE');
-  await expect(page.locator('header')).toContainText('Dário Silva · Artista Plástico');
+  await expect(page.locator('header')).toContainText('Dário Silva — Artista Plástico');
   await expect(page.locator('footer')).toContainText('SOLARTE');
 
   const title = page.getByRole('heading', { level: 1 });
-  await expect(title).toContainText('DÁRIO SILVA');
+  await expect(title).toHaveText('Dário Silva');
   const fontSize = await title.evaluate(element => Number.parseFloat(getComputedStyle(element).fontSize));
-  const mobile = (page.viewportSize()?.width ?? 0) === 375;
-  expect(fontSize).toBeGreaterThanOrEqual(mobile ? 36 : 56);
-  expect(fontSize).toBeLessThanOrEqual(mobile ? 48 : 80);
+  const mobile = (page.viewportSize()?.width ?? 0) <= 700;
+  expect(fontSize).toBeGreaterThanOrEqual(mobile ? 40 : 44);
+  expect(fontSize).toBeLessThanOrEqual(mobile ? 48 : 64);
 
   await expect(page.getByRole('heading', { name: 'Obras selecionadas', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'O Ateliê', exact: true })).toBeVisible();
-  await expect(page.locator('.hero-editorial').getByRole('link', { name: /Conheça o artista/i })).toBeVisible();
+  await expect(page.locator('.hero a[href="/trajetoria"]')).toBeVisible();
+  await expect(page.locator('.home-artist').getByRole('link', { name: 'Leia a biografia', exact: true })).toBeVisible();
   await expect(page.locator('main').getByRole('link', { name: /acervo completo|todas as obras/i }).first()).toBeVisible();
 
   const favicon = page.locator('link[rel="icon"]').first();
@@ -89,6 +91,7 @@ test('SOLARTE identifica o site e a Home apresenta o acervo e o ateliê', async 
 test('Home exibe primeiro o artista, a seleção real e o ateliê sem recortar imagens', async ({ page }) => {
   await page.goto('/');
   await expectNoPlaceholders(page);
+  await expectRealImage(page.locator('main img').first(), '/images/Captura de tela 2026-10-11 201437.png');
   await expectRealImage(page.locator('.hero-art img'), '/images/Captura de tela 2026-10-11 201437.png');
   const selected = page.locator('#selecao .gallery-grid img');
   await expect(selected).toHaveCount(curation.selected.length);
@@ -103,37 +106,32 @@ test('Home exibe primeiro o artista, a seleção real e o ateliê sem recortar i
   await expectRealImage(page.locator('.studio figure img'), '/images/Captura de tela 2026-10-11 201831.png');
 });
 
-test('composição editorial apresenta uma pintura real ao lado do texto, após o retrato de abertura', async ({ page }) => {
+test('abertura editorial equilibra texto e retrato e a Home preserva a apresentação do artista', async ({ page }) => {
   await page.goto('/');
-  const panel = page.locator('.hero-editorial');
+  const hero = page.locator('.hero');
   const portrait = page.locator('.hero-art');
-  const painting = panel.locator('.hero-editorial-art');
-  await expect(panel.getByRole('heading', { name: 'Uma vida dedicada à arte' })).toBeVisible();
-  await expect(panel).toContainText('SOLARTE — DÁRIO SILVA');
-  const artistLink = panel.getByRole('link', { name: /Conheça o artista/i });
-  await expect(artistLink).toHaveAttribute('href', '/o-artista');
-  await expect(panel.locator('.hero-geometric, figcaption')).toHaveCount(0);
-  await expectRealImage(painting.locator('img'), getArtwork('obra-01')!.image!.src);
-  const background = await panel.evaluate(element => getComputedStyle(element).backgroundColor);
-  expect(background).toBe('rgba(0, 0, 0, 0)');
-
-  const [copyBounds, paintingBounds, portraitBounds] = await Promise.all([
-    panel.locator('.hero-editorial-copy').boundingBox(), painting.boundingBox(), portrait.boundingBox(),
+  await expect(page.locator('.hero-editorial, .hero-geometric')).toHaveCount(0);
+  await expect(hero).toContainText('Artista plástico brasileiro');
+  const trajectoryLink = hero.locator('a[href="/trajetoria"]');
+  await expect(trajectoryLink).toBeVisible();
+  const [titleBounds, portraitBounds] = await Promise.all([
+    hero.getByRole('heading', { level: 1 }).boundingBox(), portrait.boundingBox(),
   ]);
-  expect(copyBounds).not.toBeNull();
-  expect(paintingBounds).not.toBeNull();
+  expect(titleBounds).not.toBeNull();
   expect(portraitBounds).not.toBeNull();
-  expect(portraitBounds!.y + portraitBounds!.height).toBeLessThan(copyBounds!.y);
   const width = page.viewportSize()!.width;
   if (width <= 700) {
-    expect(copyBounds!.y + copyBounds!.height).toBeLessThanOrEqual(paintingBounds!.y + 1);
-    expect(paintingBounds!.y - copyBounds!.y - copyBounds!.height).toBeLessThan(60);
+    expect(portraitBounds!.y + portraitBounds!.height).toBeLessThanOrEqual(titleBounds!.y + 1);
+    expect(titleBounds!.y - portraitBounds!.y - portraitBounds!.height).toBeLessThan(100);
   } else {
-    expect(copyBounds!.x + copyBounds!.width).toBeLessThanOrEqual(paintingBounds!.x + 1);
-    expect(Math.min(copyBounds!.y + copyBounds!.height, paintingBounds!.y + paintingBounds!.height))
-      .toBeGreaterThan(Math.max(copyBounds!.y, paintingBounds!.y));
+    expect(titleBounds!.x + titleBounds!.width).toBeLessThanOrEqual(portraitBounds!.x + 1);
   }
 
+  const about = page.locator('.home-artist');
+  await expect(about.getByRole('heading', { name: 'Uma vida dedicada à arte', exact: true })).toBeVisible();
+  await expect(about).toContainText(artistBiography.summary);
+  const artistLink = about.getByRole('link', { name: 'Leia a biografia', exact: true });
+  await expect(artistLink).toHaveAttribute('href', '/o-artista');
   await artistLink.click();
   await expect(page).toHaveURL('/o-artista');
   await expect(page.getByRole('heading', { name: 'A arte como expressão de uma vida', exact: true })).toBeVisible();
@@ -178,6 +176,11 @@ test('toda a navegação funciona e o menu móvel fecha após a escolha', async 
   }
   await page.locator('header').getByRole('link', { name: /SOLARTE/ }).click();
   await expect(page).toHaveURL('/');
+  const nav = await openNavigation(page);
+  await expect(nav.getByRole('link', { name: 'Início', exact: true })).toHaveAttribute('aria-current', 'page');
+  for (const { label, route } of navigation) {
+    await expect(page.locator('footer').getByRole('link', { name: label, exact: true })).toHaveAttribute('href', route);
+  }
 });
 
 test('biografia familiar e trajetória apresentam os fatos fornecidos como provisórios', async ({ page }) => {
@@ -191,6 +194,13 @@ test('biografia familiar e trajetória apresentam os fatos fornecidos como provi
   await expect(main).toContainText('Faculdade de Educação do Rio de Janeiro');
   await expect(main).toContainText(/provisóri[oa]/i);
   await expect(main).toContainText(/revisão da família|revisad[oa] pela família/i);
+  for (const paragraph of [...artistBiography.introduction, artistBiography.trainingIntro, artistBiography.trainingClosing, ...artistBiography.languages]) {
+    await expect(main).toContainText(paragraph);
+  }
+  for (const { master, study } of artist.training) {
+    await expect(main).toContainText(master);
+    await expect(main).toContainText(study);
+  }
 
   await page.goto('/trajetoria');
   for (const master of ['Jordão de Oliveira', 'Carlos Del Negro', 'Edson Motta', 'Abelardo Zaluar', 'Quirino Campofiorito', 'Mário Barata']) {
@@ -217,7 +227,7 @@ test('retratos reais e registro fotográfico acompanham a biografia e a ampliaç
   await expect(dialog).toBeVisible();
   await expectRealImage(dialog.locator('img'));
   const close = dialog.getByRole('button', { name: 'Fechar ampliação', exact: true });
-  const original = dialog.getByRole('link', { name: 'Abrir arquivo original ↗', exact: true });
+  const original = dialog.getByRole('link', { name: 'Abrir arquivo original', exact: true });
   await expect(close).toBeFocused();
   await page.keyboard.press('Tab');
   await expect(original).toBeFocused();

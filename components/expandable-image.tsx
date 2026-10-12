@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import { useRef, type KeyboardEvent } from 'react';
 import type { ArtistImage } from '@/data/artist';
+import { ArrowIcon } from './arrow';
 
 /** Amplia reproduções e registros do arquivo sem alterar os arquivos originais. */
 export function ExpandableImage({ image, title, actionLabel }: {
@@ -27,7 +28,7 @@ export function ExpandableImage({ image, title, actionLabel }: {
       }}>
         <Image src={image.src} alt={image.alt} width={image.width} height={image.height} quality={95}
           sizes="(max-width: 700px) 86vw, 45vw" className="painting" />
-        <span className="expand-icon" aria-hidden="true">↗</span>
+        <span className="expand-icon" aria-hidden="true"><ArrowIcon direction="up-right" /></span>
       </button>
       <dialog ref={dialog} className="lightbox record-lightbox" aria-label={title} onKeyDown={keepFocus}
         onClose={() => trigger.current?.focus()}
@@ -39,7 +40,7 @@ export function ExpandableImage({ image, title, actionLabel }: {
         <div className="lightbox-content">
           <button ref={close} className="lightbox-close" aria-label="Fechar ampliação" onClick={() => dialog.current?.close()}>Fechar ×</button>
           <Image src={image.src} alt={image.alt} width={image.width} height={image.height} quality={95} sizes="90vw" className="painting" />
-          <div className="lightbox-caption"><h2>{title}</h2><a href={image.src} target="_blank" rel="noopener noreferrer">Abrir arquivo original ↗</a></div>
+          <div className="lightbox-caption"><h2>{title}</h2><a href={image.src} target="_blank" rel="noopener noreferrer">Abrir arquivo original <ArrowIcon direction="up-right" /></a></div>
         </div>
       </dialog>
     </>

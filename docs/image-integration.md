@@ -12,7 +12,9 @@ O checkout foi sincronizado com `origin/main`. As imagens chegaram pelo upload a
 - 1 fotografia do ateliê;
 - 1 cópia exata do detalhe, preservada como arquivo sem criar outro registro de obra.
 
-O retrato de homem com óculos é uma pintura. As três fotografias do artista foram identificadas separadamente: camisa branca, retrato formal e boina com óculos. O retrato da mulher de cabelos castanhos permanece no acervo; o hero agora apresenta a fotografia de camisa branca.
+O retrato de homem com óculos é uma pintura. As três fotografias do artista foram identificadas separadamente: camisa branca, retrato formal e boina com óculos. O retrato da mulher de cabelos castanhos permanece no acervo.
+
+O upload posterior, commit `7e3e8a29ed2e31822d375e2a7b69c4a4959a95de`, acrescentou dois arquivos mantidos com os nomes exatos fornecidos. A Home usa `Captura de tela 2026-10-11 201437.png` (1097 × 957) na abertura: um registro de imprensa com fotografia de Dário Silva diante de pinturas e texto impresso abaixo. A seção O Ateliê usa `Captura de tela 2026-10-11 201831.png` (992 × 657). Ambos conservam as proporções originais. Agora há 16 arquivos PNG, incluindo a duplicata preservada do primeiro upload.
 
 ## Inventário e distribuição
 
@@ -26,14 +28,14 @@ Todos os nomes originais abaixo começam com `Captura de tela 2026-10-11 `. Os n
 | `182946.png` | `dario-silva-retrato-formal.png` | 530 × 727 | Fotografia formal do artista: O Artista |
 | `182958.png` | `pintura-composicao-geometrica-figura.png` | 580 × 908 | Pintura figurativa geométrica: acervo, ficha e lightbox |
 | `183021.png` | `pintura-composicao-figuras-crianca.png` | 685 × 971 | Pintura figurativa de cores suaves: acervo, ficha e lightbox |
-| `183038.png` | `atelie-dario-silva.png` | 1252 × 797 | Fotografia do ambiente de criação: seção O Ateliê na Home |
+| `183038.png` | `atelie-dario-silva.png` | 1252 × 797 | Fotografia anterior do ambiente de criação; arquivo preservado |
 | `183055.png` | `pintura-composicao-religiosa.png` | 517 × 768 | Pintura religiosa completa: acervo, ficha e lightbox |
 | `183130.png` | `pintura-retrato-homem-oculos.png` | 338 × 542 | Retrato pintado; identidade do retratado não presumida: acervo, ficha e lightbox |
 | `183151 - Copia.png` | `pintura-crucificacao.png` | 567 × 972 | Pintura religiosa em composição figurativa: acervo, ficha e lightbox |
 | `183206.png` | `pintura-paisagem-maritima.png` | 1280 × 882 | Pintura de paisagem marítima: acervo, ficha e lightbox |
 | `183411.png` | `detalhe-composicao-religiosa.png` | 575 × 1012 | Detalhe da pintura `183055.png`: ligado à ficha da obra, com ampliação |
 | `183411 - Copia.png` | `detalhe-composicao-religiosa-copia.png` | 575 × 1012 | Cópia idêntica do detalhe anterior; preservada, sem duplicar a obra ou a exibição |
-| `184215.png` | `dario-silva-camisa-branca.png` | 390 × 526 | Fotografia independente do artista: hero da Home e retrato principal em O Artista |
+| `184215.png` | `dario-silva-camisa-branca.png` | 390 × 526 | Fotografia independente do artista: retrato principal e registro ampliável em O Artista |
 
 A curadoria de obras selecionadas da Home está em `data/curation.ts`. As pinturas alternam cores mais intensas com tons suaves e formatos distintos. Todas as pinturas têm fichas próprias; o detalhe religioso está associado à pintura completa em vez de ser catalogado como uma nona obra.
 

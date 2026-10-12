@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ArrowIcon } from '@/components/arrow';
 import { ArtistImage } from '@/components/artist-image';
 import { ArtworkImage } from '@/components/artwork-image';
 import { ExpandableImage } from '@/components/expandable-image';
@@ -15,10 +16,9 @@ export default function Artist() {
 
   return (
     <article className="page-shell inner-page artist-page">
-      <header className="artist-heading">
-        <p className="eyebrow">O Artista / Dário Silva</p>
+      <header className="page-heading artist-heading">
+        <p className="eyebrow">O artista · Dário Silva</p>
         <h1>{artistBiography.title}</h1>
-        <p className="source-note">{artistBiography.sourceNote}</p>
       </header>
 
       <section className="artist-layout" aria-label="Biografia do artista">
@@ -36,7 +36,7 @@ export default function Artist() {
         </figure>
         <div className="editorial-copy biography-copy">
           <p className="eyebrow">Artista Plástico Brasileiro</p>
-          <h2>O olhar,<br /><em>a expressão.</em></h2>
+          <h2>Biografia</h2>
           {artistBiography.introduction.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
         </div>
       </section>
@@ -44,7 +44,7 @@ export default function Artist() {
       <section className="formation-section biography-section" aria-labelledby="formacao-titulo">
         <div>
           <p className="eyebrow">Formação</p>
-          <h2 id="formacao-titulo">Formação<br /><em>e trajetória</em></h2>
+          <h2 id="formacao-titulo">Formação e trajetória</h2>
         </div>
         <div className="biography-copy">
           <p>{artistBiography.trainingIntro}</p>
@@ -57,14 +57,14 @@ export default function Artist() {
             ))}
           </dl>
           <p>{artistBiography.trainingClosing}</p>
-          <Link href="/trajetoria" className="text-link">Conheça a trajetória ↗</Link>
+          <Link href="/trajetoria" className="text-link">Conheça a trajetória <ArrowIcon /></Link>
         </div>
       </section>
 
       <section className="languages-section biography-section" aria-labelledby="linguagens-titulo">
         <div>
           <p className="eyebrow">A expressão</p>
-          <h2 id="linguagens-titulo">Linguagens<br /><em>artísticas</em></h2>
+          <h2 id="linguagens-titulo">Linguagens artísticas</h2>
         </div>
         <div className="biography-copy">
           {artistBiography.languages.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
@@ -102,11 +102,16 @@ export default function Artist() {
           <figcaption>
             <span>{canDisplayImage(closingArtwork) ? closingArtwork.title : 'A pintura no acervo'}</span>
             <Link href={`/obras/${closingArtwork.slug}`}>
-              {canDisplayImage(closingArtwork) ? 'Conheça a obra ↗' : 'Ver ficha do acervo ↗'}
+              {canDisplayImage(closingArtwork) ? 'Conheça a obra' : 'Ver ficha do acervo'} <ArrowIcon />
             </Link>
           </figcaption>
         </figure>
       )}
+
+      <aside className="provenance-note" aria-label="Nota sobre a biografia">
+        <p className="eyebrow">Sobre este registro</p>
+        <p className="source-note">{artistBiography.sourceNote}</p>
+      </aside>
     </article>
   );
 }

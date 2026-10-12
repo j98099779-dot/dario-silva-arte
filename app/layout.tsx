@@ -2,8 +2,14 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Header } from '@/components/header';
 import { Brand } from '@/components/brand';
+import { ArrowIcon } from '@/components/arrow';
 import { artist } from '@/data/artist';
+import '@fontsource/libre-caslon-text/latin-400.css';
+import '@fontsource/libre-caslon-text/latin-400-italic.css';
+import '@fontsource-variable/inter';
 import './globals.css';
+
+const footerLinks = [['/', 'Início'], ['/obras', 'Obras'], ['/o-artista', 'O Artista'], ['/trajetoria', 'Trajetória'], ['/contato', 'Contato']];
 
 export const metadata: Metadata = {
   title: { default: 'SOLARTE | Dário Silva — Artista Plástico', template: '%s — SOLARTE | Dário Silva' },
@@ -20,13 +26,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="conteudo">{children}</main>
         <footer className="site-footer">
-          <Link href="/" className="brand-link" aria-label="SOLARTE — Dário Silva, início"><Brand /></Link>
-          <span>Arte, presença e memória.</span>
-          <div>
-            <a href={artist.instagram} target="_blank" rel="noopener noreferrer">Instagram ↗</a>
-            <a href={artist.facebook} target="_blank" rel="noopener noreferrer">Facebook ↗</a>
+          <div className="footer-identity">
+            <Link href="/" className="brand-link" aria-label="SOLARTE — Dário Silva, início"><Brand /></Link>
+            <p>Arte, presença e memória.</p>
           </div>
-          <small>© {new Date().getFullYear()} Dário Silva · SOLARTE</small>
+          <nav className="footer-navigation" aria-label="Navegação do rodapé">
+            {footerLinks.map(([href, label]) => <Link key={href} href={href}>{label}</Link>)}
+          </nav>
+          <div className="footer-socials">
+            <a href={artist.instagram} target="_blank" rel="noopener noreferrer">Instagram <ArrowIcon direction="up-right" className="link-arrow" /></a>
+            <a href={artist.facebook} target="_blank" rel="noopener noreferrer">Facebook <ArrowIcon direction="up-right" className="link-arrow" /></a>
+          </div>
+          <small className="footer-copyright">© {new Date().getFullYear()} Dário Silva · SOLARTE</small>
         </footer>
       </body>
     </html>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ArrowIcon } from '@/components/arrow';
 import { artist, artistBiography, artistTraining } from '@/data/artist';
 
 export const metadata = {
@@ -9,10 +10,10 @@ export const metadata = {
 export default function Trajectory() {
   return (
     <article className="page-shell inner-page trajectory-page">
-      <p className="eyebrow">Memória / Percurso</p>
-      <header className="page-intro">
-        <h1>Trajetória<span className="name-period">.</span></h1>
-        <p>A formação,<br />os mestres, a expressão.</p>
+      <header className="page-heading trajectory-heading">
+        <p className="eyebrow">Memória · Percurso</p>
+        <h1>Trajetória</h1>
+        <p className="page-description">A formação, os mestres, a expressão.</p>
       </header>
 
       <div className="trajectory-intro biography-copy">
@@ -32,7 +33,7 @@ export default function Trajectory() {
       <section className="formation-section biography-section" aria-labelledby="mestres-titulo">
         <div>
           <p className="eyebrow">Na biografia familiar</p>
-          <h2 id="mestres-titulo">Mestres<br /><em>e estudos.</em></h2>
+          <h2 id="mestres-titulo">Mestres e estudos</h2>
         </div>
         <div className="biography-copy">
           <dl className="training-list">
@@ -50,11 +51,11 @@ export default function Trajectory() {
       <section className="languages-section biography-section" aria-labelledby="expressao-titulo">
         <div>
           <p className="eyebrow">A expressão</p>
-          <h2 id="expressao-titulo">Entre linguagens<br /><em>da pintura.</em></h2>
+          <h2 id="expressao-titulo">Linguagens da pintura</h2>
         </div>
         <div className="biography-copy">
           {artistBiography.languages.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
-          <Link href="/o-artista" className="text-link">Leia a biografia ↗</Link>
+          <Link href="/o-artista" className="text-link">Leia a biografia <ArrowIcon /></Link>
         </div>
       </section>
     </article>
