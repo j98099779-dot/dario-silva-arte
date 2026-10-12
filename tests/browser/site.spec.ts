@@ -76,7 +76,7 @@ test('SOLARTE identifica o site e a Home apresenta o acervo e o ateliê', async 
 
   await expect(page.getByRole('heading', { name: 'Obras selecionadas', exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'O Ateliê', exact: true })).toBeVisible();
-  await expect(page.locator('.hero').getByRole('link', { name: /Conheça o artista/i })).toBeVisible();
+  await expect(page.locator('.hero-editorial').getByRole('link', { name: /Conheça o artista/i })).toBeVisible();
   await expect(page.locator('main').getByRole('link', { name: /acervo completo|todas as obras/i }).first()).toBeVisible();
 
   const favicon = page.locator('link[rel="icon"]').first();
@@ -103,26 +103,35 @@ test('Home exibe primeiro o artista, a seleção real e o ateliê sem recortar i
   await expectRealImage(page.locator('.studio figure img'), '/images/Captura de tela 2026-10-11 201831.png');
 });
 
-test('composição editorial equilibra o retrato no desktop e o apresenta antes do texto no celular', async ({ page }) => {
+test('composição editorial apresenta uma pintura real ao lado do texto, após o retrato de abertura', async ({ page }) => {
   await page.goto('/');
   const panel = page.locator('.hero-editorial');
   const portrait = page.locator('.hero-art');
-  await expect(panel).toContainText('Uma vida dedicada à arte');
+  const painting = panel.locator('.hero-editorial-art');
+  await expect(panel.getByRole('heading', { name: 'Uma vida dedicada à arte' })).toBeVisible();
+  await expect(panel).toContainText('SOLARTE — DÁRIO SILVA');
   const artistLink = panel.getByRole('link', { name: /Conheça o artista/i });
   await expect(artistLink).toHaveAttribute('href', '/o-artista');
-  await expect(panel.locator('svg')).toHaveAttribute('aria-hidden', 'true');
+  await expect(panel.locator('.hero-geometric, figcaption')).toHaveCount(0);
+  await expectRealImage(painting.locator('img'), getArtwork('obra-01')!.image!.src);
+  const background = await panel.evaluate(element => getComputedStyle(element).backgroundColor);
+  expect(background).toBe('rgba(0, 0, 0, 0)');
 
-  const [panelBounds, portraitBounds] = await Promise.all([panel.boundingBox(), portrait.boundingBox()]);
-  expect(panelBounds).not.toBeNull();
+  const [copyBounds, paintingBounds, portraitBounds] = await Promise.all([
+    panel.locator('.hero-editorial-copy').boundingBox(), painting.boundingBox(), portrait.boundingBox(),
+  ]);
+  expect(copyBounds).not.toBeNull();
+  expect(paintingBounds).not.toBeNull();
   expect(portraitBounds).not.toBeNull();
+  expect(portraitBounds!.y + portraitBounds!.height).toBeLessThan(copyBounds!.y);
   const width = page.viewportSize()!.width;
   if (width <= 700) {
-    expect(portraitBounds!.y + portraitBounds!.height).toBeLessThanOrEqual(panelBounds!.y + 1);
-    expect(panelBounds!.y - portraitBounds!.y - portraitBounds!.height).toBeLessThan(50);
+    expect(copyBounds!.y + copyBounds!.height).toBeLessThanOrEqual(paintingBounds!.y + 1);
+    expect(paintingBounds!.y - copyBounds!.y - copyBounds!.height).toBeLessThan(60);
   } else {
-    expect(panelBounds!.x + panelBounds!.width).toBeLessThanOrEqual(portraitBounds!.x + 1);
-    expect(Math.min(panelBounds!.y + panelBounds!.height, portraitBounds!.y + portraitBounds!.height))
-      .toBeGreaterThan(Math.max(panelBounds!.y, portraitBounds!.y));
+    expect(copyBounds!.x + copyBounds!.width).toBeLessThanOrEqual(paintingBounds!.x + 1);
+    expect(Math.min(copyBounds!.y + copyBounds!.height, paintingBounds!.y + paintingBounds!.height))
+      .toBeGreaterThan(Math.max(copyBounds!.y, paintingBounds!.y));
   }
 
   await artistLink.click();

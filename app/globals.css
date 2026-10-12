@@ -135,58 +135,58 @@
   .archive-image h2, .artwork-detail-image h2 { font-size: 36px; }
 }
 
-/* Uma abertura dedicada ao artista, com geometria silenciosa e retrato integral. */
+/* Retrato de abertura e composição editorial da obra. */
 .hero-composition {
-  display: grid;
-  grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
-  gap: clamp(28px, 4vw, 70px);
-  align-items: stretch;
-}
-.hero-editorial {
-  background: #efebe3;
-  padding: clamp(30px, 4vw, 62px);
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 40px;
+  justify-content: center;
 }
-.hero-geometric {
-  width: min(65%, 245px);
-  height: auto;
-  align-self: center;
-  opacity: .65;
+.hero-composition .hero-art { width: min(100%, 620px); margin: 0; }
+.hero-composition .hero-art figure { width: 100%; margin: 0; }
+.hero-composition .hero-art .painting { width: 100%; height: auto; max-height: none; margin: 0; }
+.hero-editorial {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: clamp(38px, 7vw, 130px);
+  align-items: center;
+  padding-bottom: 115px;
+}
+.hero-editorial-copy .eyebrow { margin-bottom: 28px; }
+.hero-editorial-copy h2 {
+  font-size: clamp(42px, 4.3vw, 68px);
+  line-height: 1.12;
+  letter-spacing: -.045em;
 }
 .hero-fine-line {
   display: block;
-  width: 38px;
+  width: 48px;
   height: 1px;
-  background: #a99e8c;
-  margin-bottom: 25px;
+  background: var(--ink);
+  margin-top: 34px;
 }
-.hero-editorial-copy > p {
-  font-family: var(--serif);
-  font-size: clamp(28px, 3vw, 42px);
-  letter-spacing: -.025em;
-  line-height: 1.25;
+.hero-editorial-copy .text-link { margin-top: 23px; }
+.hero-editorial-copy .text-link svg {
+  width: 12px;
+  height: 12px;
+  margin-left: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  vertical-align: middle;
 }
-.hero-editorial-copy .text-link { margin-top: 30px; }
-.hero-composition .hero-art { width: 100%; margin: 0; }
-.hero-composition .hero-art figure { width: 100%; max-width: 500px; margin: 0 0 0 auto; }
-.hero-composition .hero-art .painting { width: 100%; height: auto; max-height: none; margin: 0; }
+.hero-editorial-art {
+  width: min(100%, 515px);
+  justify-self: end;
+}
+.hero-editorial-art .painting { width: 100%; height: auto; }
 @media (min-width: 701px) and (max-width: 1024px) {
-  .hero-composition { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; }
-  .hero-editorial { padding: 30px; gap: 25px; }
-  .hero-geometric { width: min(80%, 205px); }
-  .hero-editorial-copy > p { font-size: 30px; }
+  .hero-editorial { gap: 40px; padding-bottom: 90px; }
+  .hero-editorial-copy h2 { font-size: clamp(39px, 4.5vw, 48px); }
 }
 @media (max-width: 700px) {
-  .hero-composition { grid-template-columns: 1fr; gap: 22px; }
-  .hero-composition .hero-art { grid-row: 1; }
-  .hero-composition .hero-art figure { max-width: none; margin: 0; }
-  .hero-editorial { grid-row: 2; display: block; position: relative; padding: 30px; }
-  .hero-geometric { position: absolute; width: 110px; height: auto; right: 14px; top: 20px; opacity: .35; }
-  .hero-editorial-copy { position: relative; }
-  .hero-editorial-copy > p { font-size: 28px; }
-  .hero-fine-line { margin-bottom: 18px; }
-  .hero-editorial-copy .text-link { margin-top: 23px; }
+  .hero-editorial { grid-template-columns: 1fr; gap: 38px; padding-bottom: 70px; }
+  .hero-editorial-copy .eyebrow { margin-bottom: 20px; }
+  .hero-editorial-copy h2 { font-size: clamp(40px, 10vw, 50px); }
+  .hero-fine-line { margin-top: 25px; }
+  .hero-editorial-copy .text-link { margin-top: 18px; }
+  .hero-editorial-art { width: 100%; }
 }

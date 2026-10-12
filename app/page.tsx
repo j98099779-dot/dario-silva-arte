@@ -3,6 +3,7 @@ import { getArtwork, canDisplayImage } from '@/data/artworks';
 import { artist, artistBiography } from '@/data/artist';
 import { curation } from '@/data/curation';
 import { ArtistImage } from '@/components/artist-image';
+import { ArtworkImage } from '@/components/artwork-image';
 import { Gallery } from '@/components/gallery';
 
 export default function Home() {
@@ -23,28 +24,13 @@ export default function Home() {
     permission: artist.portraits[0].permission,
   };
   const selected = curation.selected.flatMap(slug => { const artwork = getArtwork(slug); return artwork ? [artwork] : []; });
+  const editorialArtwork = getArtwork('obra-01');
   return (
     <>
       <section className="hero page-shell">
         <div className="hero-top"><p className="eyebrow">{artist.subtitle}</p><span className="edition">SOLARTE / Acervo & trajetória</span></div>
         <div className="hero-heading"><h1>DÁRIO SILVA</h1><p>A pintura pede tempo.<br />O olhar, espaço.</p></div>
         <div className="hero-composition">
-          <div className="hero-editorial">
-            <svg className="hero-geometric" viewBox="0 0 320 300" aria-hidden="true" focusable="false">
-              <path d="M40 235 118 38 272 97 237 257Z" fill="#ded5c6" fillOpacity=".45" />
-              <path d="m64 67 218 15-109 172Z" fill="#e2dbcf" fillOpacity=".65" />
-              <g fill="none" stroke="#9c9180" strokeWidth="1">
-                <path d="M40 235 118 38 272 97 237 257Z" />
-                <path d="m64 67 218 15-109 172Z" />
-                <path d="m118 38 55 216 99-157M40 235l242-153" />
-              </g>
-            </svg>
-            <div className="hero-editorial-copy">
-              <span className="hero-fine-line" aria-hidden="true" />
-              <p>Uma vida<br /> dedicada à arte</p>
-              <Link href="/o-artista" className="text-link">Conheça o artista ↗</Link>
-            </div>
-          </div>
           <div className="hero-art">
             <figure>
               <ArtistImage image={heroPortrait} label="Dário Silva diante de pinturas" priority />
@@ -53,6 +39,17 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-bottom"><p>Um encontro com a obra e seu autor.</p><a href="#selecao" className="text-link">Explorar o acervo <span>↓</span></a></div>
+      </section>
+      <section className="hero-editorial page-shell" aria-labelledby="life-title">
+        <div className="hero-editorial-copy">
+          <p className="eyebrow">SOLARTE — DÁRIO SILVA</p>
+          <h2 id="life-title">Uma vida<br /> dedicada à arte</h2>
+          <span className="hero-fine-line" aria-hidden="true" />
+          <Link href="/o-artista" className="text-link">Conheça o artista <svg aria-hidden="true" viewBox="0 0 12 12"><path d="M2 10 10 2M3 2h7v7" /></svg></Link>
+        </div>
+        {editorialArtwork && <figure className="hero-editorial-art">
+          <ArtworkImage artwork={editorialArtwork} sizes="(max-width: 700px) 86vw, 42vw" />
+        </figure>}
       </section>
       <section id="selecao" className="selection page-shell">
         <div className="section-heading"><div><p className="eyebrow">01 / Acervo</p><h2>Obras<br /><em>selecionadas</em></h2></div><Link className="text-link" href="/obras">Todas as obras ↗</Link></div>
